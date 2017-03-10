@@ -1,0 +1,22 @@
+body {
+  background-color: white;
+  margin: 0;
+}
+.header {
+  height:50px;
+  background:#32CD32;
+  width:100%;
+  margin:0px auto;
+  .logo_container {
+    text-align: center;
+    .logo {
+      margin-top: 5px;
+      width: 120px;
+      height: 30px;
+    }
+  }
+}
+.content {
+  width:100%;
+  margin: 20px auto;
+}
