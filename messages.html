@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title>Messages in real time</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <style>
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            position: relative;
+        }
+        #msgs
+        {
+          width: 100%;
+        }
+        #msgs .chat{
+          margin: 0 auto;
+          display: block;
+          -webkit-border-radius: 5;
+          -moz-border-radius: 5;
+          border-radius: 5px;
+          padding: 10px 20px 10px 20px;
+          border: solid #20B2AA 2px;
+          text-decoration: none;
+          width: 60%;
+          height: auto;
+          text-align: left;
+          align-items: center;
+          justify-content: center;
+          margin-top: 15px;
+        }
+        #msgs .chat:nth-child(odd) {
+          margin-left: 15%;
+        }
+        #msgs .name {
+          font-weight: bold;
+        }
+        @font-face {
+          font-family: 'Interstate';
+          src: url('/resources/INTR____.ttf')format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Interstate';
+          src: url('/resources/INTUBL__.ttf')format('truetype');
+          font-weight: bold;
+          font-style: normal;
+        }
+        body {
+          font-family: 'Interstate', sans-serif;
+          background-color: white;
+          margin: 0;
+        }
+        .header {
+          height: 50px;
+          background: #5CB859;
+          background: -webkit-linear-gradient(left, #32B5D0, #48B69A, #5CB859); /* For Safari 5.1 to 6.0 */
+          background: -o-linear-gradient(right, #32B5D0, #48B69A, #5CB859); /* For Opera 11.1 to 12.0 */
+          background: -moz-linear-gradient(right, #32B5D0, #48B69A, #5CB859); /* For Firefox 3.6 to 15 */
+          background: linear-gradient(to right, #32B5D0, #48B69A, #5CB859); /* Standard syntax */
+          width: 100%;
+          margin: 0px auto;
+        }
+         .logo_container {
+           text-align: center;
+         }
+        .logo {
+              margin-top: 7px;
+              width: 110px;
+              height: 30px;
+            }
+        .welcome {
+          margin-top: 80px;
+          text-align: center;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="header">
+  <div class="logo_container">
+    <img src="images/logo_cognizant.png" class="logo"/>
+  </div>
+</div>
+<h1 class="welcome">Your comments in Real Time!</h1>
+<div id="msgs"></div>
+<!-- Initialize socket communication with server -->
+<script src="/socket.io/socket.io.js" type="text/javascript"></script>
+
+<!-- Handle socket communication -->
+<script type="text/javascript">
+
+    // This script block handles all the Socket-IO communication
+    var handleServerRequest = function(data) {
+        if (data.message != null) {
+          $("#msgs").prepend($('<div>').addClass("chat").append($('<div>', {
+            text: data.user
+          }).addClass("name")).append($('<div>', {
+            text: data.message
+          }).addClass("message")));
+        }
+    };
+    var socket = io(); //, {port:81}
+    socket.on('ServerMessages', handleServerRequest);
+</script>
+</body>
+
+</html>
