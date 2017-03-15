@@ -45,8 +45,8 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(9900, function(){
-  console.log('listening on *:9900');
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
 
 app.use(function (req, res, next) {
